@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"regexp"
 	"strings"
+	"unicode"
 
 	"golang.org/x/net/html"
 )
@@ -68,6 +69,10 @@ func (s *Selection) Text() string {
 		if n.Type == html.TextNode {
 			// Keep newlines and spaces, like jQuery
 			buf.WriteString(n.Data)
+			if !unicode.IsSpace(rune(n.Data[len(n.Data)-1])) {
+				// TODO: naive implementation, if text does not end with whitespace, add one
+				buf.WriteByte(' ')
+			}
 		}
 		if n.FirstChild != nil {
 			for c := n.FirstChild; c != nil; c = c.NextSibling {

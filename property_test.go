@@ -76,6 +76,7 @@ func TestSetAttr2(t *testing.T) {
 
 func TestText(t *testing.T) {
 	txt := Doc().Find("h1").Text()
+	// TODO: would be nice to make that pass, <span>s should not add space
 	if strings.Trim(txt, " \n\r\t") != "Provok.in" {
 		t.Errorf("Expected text to be Provok.in, found %s.", txt)
 	}
@@ -83,6 +84,7 @@ func TestText(t *testing.T) {
 
 func TestText2(t *testing.T) {
 	txt := Doc().Find(".hero-unit .container-fluid .row-fluid:nth-child(1)").Text()
+	// TODO: would be nice to make that pass, <span>s should not add space
 	if ok, e := regexp.MatchString(`^\s+Provok\.in\s+Prove your point.\s+$`, txt); !ok || e != nil {
 		t.Errorf("Expected text to be Provok.in Prove your point., found %s.", txt)
 		if e != nil {

@@ -286,8 +286,8 @@ func TestSetHtml(t *testing.T) {
 	assertLength(t, doc.Find("#replace").Nodes, 2)
 	assertLength(t, doc.Find("#main, #foot").Nodes, 2)
 
-	if q.Text() != "testtest" {
-		t.Errorf("Expected text to be %v, found %v", "testtest", q.Text())
+	if q.Text() != "test test " {
+		t.Errorf("Expected text to be %q, found %q", "test test ", q.Text())
 	}
 
 	printSel(t, doc.Selection)
@@ -322,8 +322,8 @@ func TestSetText(t *testing.T) {
 	assertLength(t, doc.Find("#replace").Nodes, 0)
 	assertLength(t, doc.Find("#main, #foot").Nodes, 2)
 
-	if q.Text() != (repl + repl) {
-		t.Errorf("Expected text to be %v, found %v", (repl + repl), q.Text())
+	if want := (repl + " " + repl + " "); q.Text() != want {
+		t.Errorf("Expected text to be %q, found %q", want, q.Text())
 	}
 
 	h, err := q.Html()
